@@ -25,7 +25,6 @@ void FLVazia(TLista* pLista)
 	pLista->pPrimeiro = (Apontador) malloc(sizeof(TCelula));
 	pLista->pUltimo = pLista->pPrimeiro;
 	pLista->pPrimeiro->direita = NULL;	
-	printf("\nHello\n");
 }
 int LEhVazia(TLista* pLista)
 {
@@ -62,15 +61,8 @@ int LInserePos(TLista *pLista, TItem* pItem, int pos)
 		x++;
 		ptr = ptr->direita; /*Proxima Celula*/
 		pAux = pAux->direita; /* próxima célula */
-		printf("-Aux: %d-\n", pAux->Item.Chave);
-		printf("-PTR: %d-\n", ptr->Item.Chave);
-		/*
-		PTR -> Criar 
-		PTR -> Criação - > Aux (Frente)
-		
-		
-		
-		*/
+		//printf("-Aux: %d-\n", pAux->Item.Chave);
+		//printf("-PTR: %d-\n", ptr->Item.Chave);
 	}
 
 	return 1;
@@ -78,12 +70,40 @@ int LInserePos(TLista *pLista, TItem* pItem, int pos)
 
 int LRetira(TLista* pLista, TItem* pItem)
 {
-	TCelula* pAux;
+	Apontador pAux;
 	if (LEhVazia(pLista))
 		return 0;
 	*pItem = pLista->pPrimeiro->direita->Item;
 	pAux = pLista->pPrimeiro;
 	pLista->pPrimeiro = pLista->pPrimeiro->direita;
 	free(pAux);
+	return 1;
+}
+
+int LRetiraPos(TLista* pLista, TItem* pItem, int pos)
+{
+	Apontador pAux;
+	Apontador ptr;
+	if (LEhVazia(pLista))
+		return 0;
+	int x = 0;
+	pAux = pLista->pPrimeiro->direita; // Cabeça -> Direita
+	ptr = pLista->pPrimeiro; //Começa na Cabeça
+	while (x <= pos)
+	{
+
+		if (x == pos)
+		{
+			//*pItem = pLista->pPrimeiro->direita->Item;// < Não alimente o PItem
+			ptr->direita = pAux->direita;
+			free(pAux);
+			break;
+		}
+		x++;
+		ptr = ptr->direita; /*Proxima Celula*/
+		pAux = pAux->direita; /* próxima célula */
+		printf("-Aux: %d-\n", pAux->Item.Chave);
+		printf("-PTR: %d-\n", ptr->Item.Chave);
+	}
 	return 1;
 }
