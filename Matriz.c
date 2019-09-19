@@ -15,7 +15,7 @@ void ImprimeMatriz(TLista* pLista)
 	pAux = pLista->pPrimeiro->direita;
 	while (pAux != NULL)
 	{
-		printf("%d\n", pAux->Item.Chave);
+		printf("-%d-\n", pAux->Item.Chave);
 		pAux = pAux->direita; /* próxima célula */
 	}	
 }
@@ -45,20 +45,32 @@ int LInsere(TLista *pLista, TItem* pItem)
 int LInserePos(TLista *pLista, TItem* pItem, int pos)
 {
 	Apontador pAux;
+	Apontador ptr;
 	int x = 0;
-	pAux = pLista->pPrimeiro->direita;
-	while (x < pos)
+	pAux = pLista->pPrimeiro->direita; // Cabeça -> Direita
+	ptr = pLista->pPrimeiro; //Começa na Cabeça
+	while (x <= pos)
 	{
-		x++;
-		if (x == pos - 1)
+
+		if (x == pos)
 		{
-			pLista->pUltimo->direita = (Apontador)malloc(sizeof(TCelula));
-			pLista->pUltimo = pLista->pUltimo->direita;
-			pLista->pUltimo->Item = *pItem;
-			//pLista->pUltimo->direita = pAux->direita;
+			ptr->direita = (Apontador)malloc(sizeof(TCelula));
+			ptr->direita->direita = pAux;
+			ptr->direita->Item = *pItem;
+			break;
 		}
-		printf("-%d-\n", pAux->Item.Chave);
+		x++;
+		ptr = ptr->direita; /*Proxima Celula*/
 		pAux = pAux->direita; /* próxima célula */
+		printf("-Aux: %d-\n", pAux->Item.Chave);
+		printf("-PTR: %d-\n", ptr->Item.Chave);
+		/*
+		PTR -> Criar 
+		PTR -> Criação - > Aux (Frente)
+		
+		
+		
+		*/
 	}
 
 	return 1;
