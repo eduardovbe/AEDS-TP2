@@ -2,9 +2,24 @@
 
 void LeMatriz(FILE *OFILE)
 {
-	//Le arquivo
-	//Faz Matriz	
-	
+
+	//Inicializar Matriz (Cabeça 1)
+
+	char fileName[50];
+	strcpy(fileName, "Matriz.txt");
+	int L, C;
+	OFILE = fopen(fileName, "r");
+	fscanf(OFILE, "%d, %d", &L, &C);
+	//Inicializar cabeças adjacentes
+	int O, H;
+	float J;
+	while (fscanf(OFILE, "%d, %d, %f", &O, &H, &J) != EOF)
+	{
+		
+		printf("| %d %d %.2f |\n", O, H, J);
+		//Chamar SubProgramar para inicializar cedulas;
+
+	}
 	
 }
 
@@ -13,18 +28,20 @@ void ImprimeMatriz(TLista* pLista)
 {
 	Apontador pAux;
 	pAux = pLista->pPrimeiro->direita;
-	while (pAux != NULL)
+	while (pAux->linha != -1)
 	{
 		printf("-%d-\n", pAux->Item.Chave);
 		pAux = pAux->direita; /* próxima célula */
-	}	
+	}
 }
 
 void FLVazia(TLista* pLista)
 {
 	pLista->pPrimeiro = (Apontador) malloc(sizeof(TCelula));
 	pLista->pUltimo = pLista->pPrimeiro;
-	pLista->pPrimeiro->direita = NULL;	
+	pLista->pPrimeiro->linha = -1;
+	pLista->pPrimeiro->coluna = -1;
+	pLista->pPrimeiro->direita = pLista->pPrimeiro;	
 }
 int LEhVazia(TLista* pLista)
 {
@@ -36,7 +53,7 @@ int LInsere(TLista *pLista, TItem* pItem)
 	pLista->pUltimo->direita = (Apontador) malloc(sizeof(TCelula));
 	pLista->pUltimo = pLista->pUltimo->direita;	
 	pLista->pUltimo->Item = *pItem;
-	pLista->pUltimo->direita = NULL;
+	pLista->pUltimo->direita = pLista->pPrimeiro;
 	
 	return 1;
 }
