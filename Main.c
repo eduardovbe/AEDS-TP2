@@ -20,6 +20,7 @@ int main()
 		printf("4) Inserir Pos\n");
 		printf("5) Retirar\n");
 		printf("6) RetirarPos\n");
+		printf("7) Ler Arquivo");
 		printf("0) Sair \n");
 		scanf("%d", &input);
 		if(input == 0)
@@ -54,6 +55,10 @@ int main()
 		{
 			scanf("%d", &pos);
 			error = LRetiraPos(&lista, &item, pos);
+		}
+		else if (input == 7)
+		{
+			LeMatriz(&nfile);
 		}
 		
 	}
