@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef int TipoChave;
+typedef double TipoChave;
 typedef struct {
 	TipoChave Chave;
 	/* outros componentes */
@@ -10,7 +10,9 @@ typedef struct {
 typedef struct Celula* Apontador;
 typedef struct Celula {
 	TItem Item;
-	struct Celula* direita; /* Apontador pProx; */
+	int linha, coluna;
+	struct Celula* direita; /* Apontador para a Proxima casa; */
+	struct Celula* abaixo;  /* Apontador para a casa abaixo; */
 } TCelula;
 
 typedef struct {
@@ -30,4 +32,5 @@ int LEhVazia(TLista* pLista);
 int LInsere(TLista* pLista, TItem *pItem);
 int LInserePos(TLista *pLista, TItem* pItem, int pos);
 int LRetira(TLista* pLista, TItem *pItem);
+int LRetiraPos(TLista* pLista, TItem* pItem, int pos);
 void LImprime(TLista* pLista);
