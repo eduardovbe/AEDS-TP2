@@ -4,7 +4,7 @@
 int main()
 {
 	FILE *nfile;
-	TLista lista;
+	TMatriz lista;
 	int input;
 	int running = 1;
 	TItem item;
@@ -14,23 +14,18 @@ int main()
 	
 	while(running == 1)
 	{
-		printf("1) Inicializa\n");
+		printf("1) Ler Arquivo\n");
 		printf("2) Insere\n");
 		printf("3) Imprime\n");
 		printf("4) Inserir Pos\n");
 		printf("5) Retirar\n");
 		printf("6) RetirarPos\n");
-		printf("7) Ler Arquivo");
 		printf("0) Sair \n");
 		scanf("%d", &input);
 		if(input == 0)
 		{
 			running = 0;
 			break;	
-		}
-		else if (input == 1)
-		{
-			FLVazia(&lista);
 		}
 		else if (input == 2)
 		{
@@ -56,11 +51,10 @@ int main()
 			scanf("%d", &pos);
 			error = LRetiraPos(&lista, &item, pos);
 		}
-		else if (input == 7)
+		else if (input == 1)
 		{
-			LeMatriz(&nfile);
+			LeMatriz(&nfile, &lista, &item);
 		}
-		
 	}
 	//[6 >,[1] >,3,5]
 	//[6,3,5,[1] -> 3]
