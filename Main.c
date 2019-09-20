@@ -11,7 +11,7 @@ int main()
 	int pos = 0;
 	int error;
 	//Interface:
-	
+
 	while(running == 1)
 	{
 		printf("1) Ler Arquivo\n");
@@ -25,31 +25,31 @@ int main()
 		if(input == 0)
 		{
 			running = 0;
-			break;	
+			break;
 		}
 		else if (input == 2)
 		{
-			scanf("%d", &item);
-			error = LInsere(&lista, &item, pos);
+			//scanf("%d", &item);
+			//error = LInsere(&lista, &item, pos);
 		}
 		else if (input == 3)
 		{
 			ImprimeMatriz(&lista);
 		}
-		else if (input == 4) 
+		else if (input == 4)
 		{
-			scanf("%d", &pos);
-			scanf("%d", &item);
-			error = LInserePos(&lista, &item, pos);
+			//scanf("%d", &pos);
+			//scanf("%d", &item);
+			//error = LInserePos(&lista, &item, pos);
 		}
 		else if (input == 5)
 		{
-			error = LRetira(&lista, &item);
+			//error = LRetira(&lista, &item);
 		}
 		else if (input == 6)
 		{
-			scanf("%d", &pos);
-			error = LRetiraPos(&lista, &item, pos);
+			//scanf("%d", &pos);
+			//error = LRetiraPos(&lista, &item, pos);
 		}
 		else if (input == 1)
 		{
@@ -59,9 +59,9 @@ int main()
 	//[6 >,[1] >,3,5]
 	//[6,3,5,[1] -> 3]
 	//
-	
-	
-	
-	
-	
+
+
+
+
+
 }
