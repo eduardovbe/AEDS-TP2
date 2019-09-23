@@ -16,7 +16,7 @@ void LeMatriz(FILE *OFILE, TMatriz* pMatriz, TItem *item)
 	float I;
 	while (fscanf(OFILE, "%d, %d, %f", &L, &C, &I) != EOF)
 	{
-		printf("| %d %d %.2f |\n", L, C, I);
+		//printf("| %d %d %.2f |\n", L, C, I);
 		Insere(pMatriz, I, L, C);
 		//Chamar SubProgramar para inicializar cedulas;
 
@@ -47,7 +47,7 @@ void InicializarCabecaLinha(TMatriz* pMatriz)
 		pAux->coluna = 0;
 		pAux->abaixo = pMatriz->pPrimeiro; /*Aponta para o inicio*/
 		pAux->direita = pAux; /*Aponta para ele mesmo*/
-		pAux = pAux -> abaixo;
+		pAux = pAux->abaixo;
 	}
 
 }
@@ -61,100 +61,176 @@ void InicializarCabecaColuna(TMatriz* pMatriz)
 	{
 		pAux = (Apontador)malloc(sizeof(TCelula)); //Direita, criou algo
 		pAux->coluna = CABECA;
-        pAux->linha = 0;
+		pAux->linha = 0;
 		pAux->direita = pMatriz->pPrimeiro; /*Aponta para o inicio*/
 		pAux->abaixo = pAux; /*Aponta para ele mesmo*/
 		pAux = pAux->direita;
 	}
 }
+/*void ImprimeMatriz(TMatriz* pMatriz)
+{
+	Apontador Andante;
+	Apontador posY;
 
-void ImprimeMatriz(TMatriz* pMatriz){
- int i, j;
-    TCelula *pCelula;
+	int verificarIndice = 0;
+	int restante = 0;
+	int rx;
+
+	posY = pMatriz->pPrimeiro; // Y = -1 
 
 
-    pCelula = pMatriz->pPrimeiro->abaixo;
+	int xx = 0, yy = 0;
 
-    printf("\n");
+	printf("\n%f\n\n", pMatriz->pPrimeiro->abaixo->direita->Item); //Cabeça -> Abaixo -> Direita (Y = 0, X = 0)
+	printf("\n%f\n\n", pMatriz->pPrimeiro->abaixo->direita->direita->Item); //Cabeça -> Abaixo -> Direita (Y = 0, X = 0)
+	printf("\n%f\n\n", pMatriz->pPrimeiro->abaixo->direita->direita->direita->Item); //Cabeça -> Abaixo -> Direita (Y = 0, X = 0)
+	for (yy = 0; yy < pMatriz->Y; yy++) //Linha
+	{
+		posY = posY->abaixo;
+		Andante = posY;
+		verificarIndice = 0;
+		printf("[ ");
+		for (xx = 0; xx < pMatriz->X; xx++)//Coluna
+		{
+			Andante = Andante->direita;
+			verificarIndice = Andante->coluna - xx;
+			if (verificarIndice > 0)
+			{
+				while (verificarIndice > 0)
+				{
+					printf("0 ");
+					verificarIndice--;
+					if (verificarIndice >= 0)
+					{
+						xx++;
+					}
+				}
+			}
+			if (Andante->linha == CABECA || Andante->coluna == CABECA)
+			{
+				//printf("(%d %d) ", Andante->coluna, Andante->linha);
+				restante = pMatriz->X - xx;
+				//printf("%d", restante);
+				for (rx = 0; rx < restante; rx++)
+				{
+					printf("0 ");
+					xx++;
+				}
+			}
+			else
+			{
+				printf("%f ", Andante->Item);
+				//printf("(%d %d) ", Andante->coluna, Andante->linha);
+			}
+			//printf("%f\n ", Andante->Item);
+		}
+		printf("]\n");
+		//posY = posY->abaixo;
+		//Andante = posY;
+	}
+	//Imprimir linha por linha
+}
+*/
+void ImprimeMatriz(TMatriz* pMatriz) {
+	int y, x;
+	Apontador Aux;
+	Apontador Linha;
 
-    for (i = 1; i <= pMatriz ->X; i++){
-        for (j = 1; j <= pMatriz ->Y; j++){
-            if (pCelula->direita->linha == i && pCelula->direita->coluna == j){
-                pCelula = pCelula->direita;
-                printf("  \t%0.2f   ", pCelula ->valor);
-            }
-            else{
-                printf("  \t%0.2f   ", 0.0F);
-            }
-        }
-        printf("\n");
-        pCelula = pCelula->direita->abaixo;
-    }
 
+	Linha = pMatriz->pPrimeiro->abaixo;
+	Aux = Linha;
+
+	printf("\n%f\n\n", pMatriz->pPrimeiro->abaixo->abaixo->direita->Item); //Cabeça -> Abaixo -> Direita (Y = 0, X = 0)
+	printf("\n%f\n\n", pMatriz->pPrimeiro->abaixo->direita->direita->Item); //Cabeça -> Abaixo -> Direita (Y = 0, X = 0)
+	printf("\n%f\n\n", pMatriz->pPrimeiro->abaixo->direita->direita->direita->Item); //Cabeça -> Abaixo -> Direita (Y = 0, X = 0)
+	printf("\n%f\n\n", pMatriz->pPrimeiro->abaixo->direita->direita->direita->direita->Item); //Cabeça -> Abaixo -> Direita (Y = 0, X = 0)
+
+	for (y = 1; y <= pMatriz->Y; y++) {
+		printf("\n[");
+		for (x = 1; x <= pMatriz->X; x++) {
+			if (Aux->direita->linha == y && Aux->direita->coluna == x) {
+				Aux = Aux->direita;
+				printf("\t%0.2f\t", Aux->Item);
+			}
+			else {
+				printf("\t%0.2f\t", 0.0F);
+			}
+		}
+		Linha = Linha->abaixo;
+		Aux = Linha->direita;
+		printf("]\n");
+	}
 }
 
-void Insere(TMatriz* pMatriz, float valor, int Linha, int Coluna)
+void Insere(TMatriz* pMatriz, float pItem, int Linha, int Coluna)
 {
 
 	Apontador AndadorLinha;
+	Apontador AjudantanteColuna;
 	Apontador AndadorColuna;
 	Apontador Aux;
 
-	int x;
-	int i;
-	int y;
+	int y = 0;
+	int i = 0;
+	int x = 0;
+	//Aux->linha = Linha;
+	//Aux->coluna = Coluna;
+	AndadorLinha = pMatriz->pPrimeiro; // [-1,-1]
+	AndadorColuna = pMatriz->pPrimeiro;// [-1,-1]
 
-	Aux  = (Apontador)malloc(sizeof(TCelula));
-	Aux-> valor;
-	Aux ->linha = Linha;
-	Aux ->coluna = Coluna;
-	AndadorLinha = pMatriz->pPrimeiro-> abaixo; // [-1,0]
-	AndadorColuna = pMatriz ->pPrimeiro-> direita;// [0,-1]
-
-	//LINHA
-	for(x = 0;x < Linha-1;x++){ // Descer ate a linha desejada
-	    AndadorLinha = AndadorLinha->abaixo;
+	for (y = 0; y < Linha; y++) 
+	{ // Descer ate a linha desejada
+		AndadorLinha = AndadorLinha->abaixo; //[-1,0] e assim por diante
 	}
-    for(i = 0;i < Coluna;i++){
-            if(AndadorLinha ->direita ->linha =! CABECA){//verifica se aponta pra cabeça
-                if( (AndadorLinha->direita->coluna) > (Aux->coluna)){//verifica se a celula esta a esquerda
-                        Aux -> direita = AndadorLinha -> direita;
-                        AndadorLinha->direita = Aux;
-                }
-                else{
-                    AndadorLinha = AndadorLinha-> direita;
-                }
-        }
+	Aux = AndadorLinha->direita;
+	AjudantanteColuna = AndadorLinha;
+	for (i = 0; i < Coluna; i++)  //Coluna
+	{
+		printf("\nLinha: %d", y);
+		printf("Coluna: %d\n", i);
+		if (Aux->direita->linha != CABECA)//verifica se não aponta pra cabeça
+		{
+			AjudantanteColuna = AjudantanteColuna->direita;
+			Aux = Aux->direita;
+		}
+		if (Aux->direita->linha == CABECA)
+		{ //Verifica se a celula esta a direita
+			Aux->direita = (Apontador)malloc(sizeof(TCelula)); //aponta para a direita e inicializa a celula
+			Aux = Aux->direita; //Vai para a celula
+			Aux->direita = AndadorLinha; // Aponta para a celula
+			Aux->coluna = Coluna;
+			Aux->linha = Linha;
+			Aux->direita = AndadorLinha;
+			Aux->Item.Chave = pItem;
+			printf("\n%f\n", Aux->Item);
+			break;
+		}
 
-	}
-	if (AndadorLinha->direita->linha == CABECA){ //Verifica se a celula esta a direita
-        Aux->direita = AndadorLinha->direita; //aponta em cabeca
-        AndadorLinha->direita = Aux; //
 	}
 
 
 	//COLUNA
 
-    for(y = 0;y < Coluna-1;y++){ // Anda ate a coluna desejada
-            AndadorColuna = AndadorColuna->direita;
+	/*for (y = 0; y < Coluna - 1; y++) { // Anda ate a coluna desejada
+		AndadorColuna = AndadorColuna->direita;
 	}
-    for(i = 0;i < Linha;i++){
-            if(AndadorColuna ->abaixo ->coluna =! CABECA){//verifica se aponta pra cabeça
-                if((AndadorColuna->abaixo->coluna) > (Aux->coluna) ){//verifica se a celula esta a esquerda
-                        Aux -> abaixo = AndadorColuna -> abaixo;
-                        AndadorColuna->abaixo = Aux;
-                }
-                else{
-                    AndadorLinha = AndadorLinha-> abaixo;
-                }
-        }
+	for (i = 0; i < Linha; i++) {
+		if (AndadorColuna->abaixo->coluna != CABECA) {//verifica se aponta pra cabeça
+			if ((AndadorColuna->abaixo->coluna) > (Aux->coluna)) {//verifica se a celula esta a esquerda
+				Aux->abaixo = AndadorColuna->abaixo;
+				AndadorColuna->abaixo = Aux;
+			}
+			else {
+				AndadorLinha = AndadorLinha->abaixo;
+			}
+		}
 
 	}
-	if (AndadorLinha->abaixo->coluna == CABECA){
-        Aux->abaixo = AndadorColuna->abaixo; //aponta em cabeca
-        AndadorColuna->abaixo = Aux; //
+	if (AndadorLinha->abaixo->coluna == CABECA) {
+		Aux->abaixo = AndadorColuna->abaixo; //aponta em cabeca
+		AndadorColuna->abaixo = Aux; //
 	}
-
+	*/
 }
 
 
@@ -165,7 +241,7 @@ int LEhVazia(TLista* pLista)
 
 int LInsere(TLista *pLista, TItem* pItem)
 {
-	pLista->pUltimo->direita = (Apontador) malloc(sizeof(TCelula));
+	pLista->pUltimo->direita = (Apontador)malloc(sizeof(TCelula));
 	pLista->pUltimo = pLista->pUltimo->direita;
 	pLista->pUltimo->Item = *pItem;
 	pLista->pUltimo->direita = pLista->pPrimeiro;
