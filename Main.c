@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "Matriz.h"
+#include "Produto.h"
 int main()
 {
 	FILE *nfile;
@@ -14,46 +15,25 @@ int main()
 
 	while(running == 1)
 	{
-		printf("1) Ler Arquivo\n");
-		printf("2) Insere\n");
-		printf("3) Imprime\n");
-		printf("4) Inserir Pos\n");
-		printf("5) Retirar\n");
-		printf("6) RetirarPos\n");
-		printf("0) Sair \n");
+		printf(" ____________________\n");
+		printf("|---Menu principal---|\n");
+		printf("|1) Ler Arquivo      |\n");
+		printf("|2) Imprime          |\n");
+		printf("|0) Sair             |\n");
+		printf("|____________________|\n");
 		scanf("%d", &input);
 		if(input == 0)
 		{
 			running = 0;
 			break;
 		}
-		else if (input == 2)
-		{
-			//scanf("%d", &item);
-			//error = LInsere(&lista, &item, pos);
-		}
-		else if (input == 3)
-		{
-			ImprimeMatriz(&lista);
-		}
-		else if (input == 4)
-		{
-			//scanf("%d", &pos);
-			//scanf("%d", &item);
-			//error = LInserePos(&lista, &item, pos);
-		}
-		else if (input == 5)
-		{
-			//error = LRetira(&lista, &item);
-		}
-		else if (input == 6)
-		{
-			//scanf("%d", &pos);
-			//error = LRetiraPos(&lista, &item, pos);
-		}
 		else if (input == 1)
 		{
 			LeMatriz(&nfile, &lista, &item);
+		}
+		else if (input == 2)
+		{
+			ImprimeMatriz(&lista);
 		}
 	}
 	//[6 >,[1] >,3,5]
