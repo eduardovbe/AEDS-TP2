@@ -1,0 +1,41 @@
+int usuario, x = 0, y = 0,z;
+int lendoResto = 1;
+char resto[1000];
+char separado[1000];
+char data[100];
+int quantidade;
+
+while (fscanf(OFILE, "%d %s", &usuario, &resto) != EOF)
+	{
+			while(lendoResto == 1)
+			{
+				if(resto[x] != " ") OI
+				{
+					separado[y] = resto[x];
+					y++;
+				}
+				else if(resto[x] == "\n")
+				{
+					separado[y] = "\n";
+					//Chama o Insere, dando o separado, o insere vai verificar se o separado e DATA ou Quantidade, fazendo o mesmo processo, mas procurando pelas XX/XX/XX agora;
+					y = 0;
+					x = 0;
+					break;
+				}
+				else
+				{
+					separado[y] = "\n";
+					//Chama o Insere, dando o separado, o insere vai verificar se o separado e DATA ou Quantidade, fazendo o mesmo processo, mas procurando pelas XX/XX/XX agora;
+					//A diferença e que esse não da break no codigo, pois vai continuar. Mas é necessario limpar o separado antes de continuar
+					for(z = 0; z < y; z++)
+					{
+					separado[z] = '';
+					}
+					y = 0;
+				}
+
+				x++;
+			}
+			Insere(pMatriz, I, L, C); //Chama subprograma para inicializar cedulas
+	}
+
