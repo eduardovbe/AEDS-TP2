@@ -69,7 +69,7 @@ void ImprimeMatriz(TMatriz* pMatriz) {
 
 
 	Linha = pMatriz->pPrimeiro->abaixo;
-	Aux -> Item ->pPrimeiro;
+	Aux -> Item = Aux -> Item ->pPrimeiro;
 	Aux = Linha;
 
     //printf("\n%f\n\n", pMatriz->pPrimeiro->abaixo->abaixo->abaixo->direita->valor);
