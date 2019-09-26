@@ -11,7 +11,7 @@ void LeMatriz(FILE *OFILE, TMatriz* pMatriz, double *item)
 	double I;
 	while (fscanf(OFILE, "%d, %d, %lf", &L, &C, &I) != EOF)
 	{
-		if (I != 0)
+		if (I != 0 && I != 0.0)
 		{
 			Insere(pMatriz, I, L, C); //Chama subprograma para inicializar cedulas
 		}
