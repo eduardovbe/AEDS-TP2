@@ -11,7 +11,10 @@ void LeMatriz(FILE *OFILE, TMatriz* pMatriz, double *item)
 	double I;
 	while (fscanf(OFILE, "%d, %d, %lf", &L, &C, &I) != EOF)
 	{
-		Insere(pMatriz, I, L, C); //Chama subprograma para inicializar cedulas
+		if (I != 0)
+		{
+			Insere(pMatriz, I, L, C); //Chama subprograma para inicializar cedulas
+		}
 	}
 	printf("Arquivo Lido com sucesso!\n");
 	fclose(OFILE);
