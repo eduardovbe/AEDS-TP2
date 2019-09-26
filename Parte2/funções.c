@@ -80,7 +80,7 @@ void ImprimeMatriz(TMatriz* pMatriz) {
             		while(Aux->Item->pProx != NULL){
                 		if (Aux->direita->linha == y && Aux->direita->coluna == x) {
                     		printf(" %d %s ",Aux->Item->quantidade, Aux->Item->data);
-				Aux->Item-> = Aux->Item->pProx;
+				Aux->Item = Aux->Item->pProx;
                	 	}
                 
            	 }
