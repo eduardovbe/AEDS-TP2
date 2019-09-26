@@ -4,7 +4,7 @@ void quantidadeComprasPorCliente(TMatriz* pMatriz){
     TCelula *Aux;
 	TCelula *Linha;
 
-
+	Aux ->Item = Aux->Item->pPrimeiro
 	Linha = pMatriz->pPrimeiro->abaixo;
 	Aux = Linha;
     Aux = TMatriz->pPrimeiro->direita->abaixo;
@@ -34,7 +34,7 @@ void quantidadeComprasPorProduto(TMatriz* pMatriz){
     TCelula *Aux;
 	TCelula *Coluna;
 
-
+	Aux ->Item = Aux->Item->pPrimeiro
 	Linha = pMatriz->pPrimeiro->abaixo;
 	Aux = Coluna;
     Aux = TMatriz->pPrimeiro->direita->abaixo;
@@ -69,20 +69,22 @@ void ImprimeMatriz(TMatriz* pMatriz) {
 
 
 	Linha = pMatriz->pPrimeiro->abaixo;
+	Aux -> Item ->pPrimeiro;
 	Aux = Linha;
 
     //printf("\n%f\n\n", pMatriz->pPrimeiro->abaixo->abaixo->abaixo->direita->valor);
 	for (y = 1; y <= pMatriz->Y; y++) {
 		printf("\n[");
 		for (x = 1; x <= pMatriz->X; x++) {
-            while(Aux->Item->pProx != NULL){
-                if (Aux->direita->linha == y && Aux->direita->coluna == x) {
-                    Aux->Item = Aux->Item->pProx;
-                    printf(" %d %s ",Aux->Item->quantidade, Aux->Item->data);
-                }
+			Aux = Aux->direita;
+            		while(Aux->Item->pProx != NULL){
+                		if (Aux->direita->linha == y && Aux->direita->coluna == x) {
+                    		printf(" %d %s ",Aux->Item->quantidade, Aux->Item->data);
+				Aux->Item-> = Aux->Item->pProx;
+               	 	}
                 
-            }
-            Aux = Aux->direita;
+           	 }
+            
 		}
 		Linha = Linha->abaixo;
 		Aux = Linha;
