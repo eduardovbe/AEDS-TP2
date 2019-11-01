@@ -16,7 +16,7 @@ int main(void)
         fprintf(lista,"%s","\n");
     }
     /* gerando valores aleatórios entre zero e 100 */
-    fprintf(lista,"%d ", rand() % 9);
+    fprintf(lista,"%d ", 1+ rand() % 9);
 
   }
   fclose(lista);
