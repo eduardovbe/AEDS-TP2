@@ -15,7 +15,7 @@ int main(void)
     if((i % 2 == 0) && i != 0){
         fprintf(lista,"%s","\n");
     }
-    /* gerando valores aleatórios entre zero e 100 */
+    /* gerando valores aleatÃ³rios entre zero e 100 */
     fprintf(lista,"%d ", rand() % 9);
 
   }
