@@ -6,17 +6,17 @@
 #define C 40
 
 void combinationUtil(int arr[], int data[], int start, int end,
-                     int index, int r, int peso[],int* valort,int vetor[]);
+                     int index, int r, int peso[],int* valort,int vetor[], int N);
 
 // The main function that prints all combinations of size r
 // in arr[] of size n. This function mainly uses combinationUtil()
-void printCombination(int arr[], int n, int r,int peso[],int*valort,int vetor[])
+void printCombination(int arr[], int n, int r,int peso[],int*valort,int vetor[], int N)
 {
     // A temporary array to store all combination one by one
     int data[r];
 
     // Print all combination using temprary array 'data[]'
-    combinationUtil(arr, data, 0, n-1, 0, r, peso,valort,vetor);
+    combinationUtil(arr, data, 0, n-1, 0, r, peso,valort,vetor,N);
 }
 
 /* arr[]  ---> Input Array
@@ -25,7 +25,7 @@ void printCombination(int arr[], int n, int r,int peso[],int*valort,int vetor[])
    index  ---> Current index in data[]
    r ---> Size of a combination to be printed */
 void combinationUtil(int arr[], int data[], int start, int end,
-                     int index, int r,int peso[],int* valort,int vetor[])
+                     int index, int r,int peso[],int* valort,int vetor[], int N)
 {
     int pesot = 0;
     int newvalor = 0;
@@ -38,7 +38,7 @@ void combinationUtil(int arr[], int data[], int start, int end,
 
         for (int j=0; j<r; j++){
                 newvalor += data[j];
-                for(int k = 0; k < 5; k++)
+                for(int k = 0; k < N; k++)
                 {
                     if(data[j] == arr[k]){
                         pesot+= peso[k];
@@ -52,22 +52,14 @@ void combinationUtil(int arr[], int data[], int start, int end,
             if(*valort <= newvalor)
             {
                 printf("=%d=\n", newvalor);
+                printf("peso total = %d \n",pesot);
                 *valort = newvalor;
-                for(int i =0;i < r;i++){
-                    if(i >= r)
-                    {
-                        vetor[i] = 0;
-                    }
-                    else
-                    {
-                        vetor[i] = data[i];
-                    }
-
+                for(int i =0;i < r;i++)
+                {
+                    vetor[i] = data[i];
                 }
             }
         }
-
-        //printf("peso total = %d \n",pesot);
         return;
     }
 
@@ -78,7 +70,7 @@ void combinationUtil(int arr[], int data[], int start, int end,
     for (int i=start; i<=end && end-i+1 >= r-index; i++)
     {
         data[index] = arr[i];
-        combinationUtil(arr, data, i+1, end, index+1, r,peso,valort,vetor);
+        combinationUtil(arr, data, i+1, end, index+1, r,peso,valort,vetor,N);
     }
 }
 
@@ -118,13 +110,14 @@ int main()
         }
 
         int n = sizeof(itens)/sizeof(itens[0]);
+                printf("%d", n);
         for(int i = 1;i <= N;i++)
         {
             l = i;
-            printCombination(itens, n, l,peso,&valort,vetor);
+            printCombination(itens, n, l,peso,&valort,vetor, N);
         }
         printf("Valores na mochila: ");
-        for(int i =0;i < 5;i++){
+        for(int i =0;i < N;i++){
             if(vetor[i] != 0)
             {
             printf("%d ",vetor[i]);
