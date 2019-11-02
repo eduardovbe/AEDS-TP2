@@ -51,8 +51,8 @@ void combinationUtil(int arr[], int data[], int start, int end,int index, int r,
         {
             if(*valort <= newvalor)
             {
-                printf("=%d=\n", newvalor);
-                printf("peso total = %d \n",pesot);
+                //printf("=%d=\n", newvalor);
+                //printf("peso total = %d \n",pesot);
                 *valort = newvalor;
                 for(int i =0;i < r;i++)
                 {
