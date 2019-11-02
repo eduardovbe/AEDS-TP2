@@ -51,8 +51,9 @@ void combinationUtil(int arr[], int data[], int start, int end,
         {
             if(*valort <= newvalor)
             {
+                printf("=%d=\n", newvalor);
                 *valort = newvalor;
-                for(int i =0;i < 5;i++){
+                for(int i =0;i < r;i++){
                     if(i >= r)
                     {
                         vetor[i] = 0;
@@ -103,7 +104,13 @@ int main()
         int itens[N];
         int peso[N];
         int vetor[N];
+
         int j = 0;
+        for (j = 0; j < N; j++)
+        {
+        vetor[j] = 0;
+        }
+        j = 0;
         //printf("%d", N);
         while(fscanf(input, "%d %d", &peso[j], &itens[j]) != EOF)
         {
