@@ -1,5 +1,3 @@
-
-// Program to print all combination of size r in an array of size n
 #include <stdio.h>
 #include <time.h>
 
@@ -7,30 +5,19 @@
 
 void combinationUtil(int arr[], int data[], int start, int end,int index, int r, int peso[],int* valort,int vetor[], int N, int pesoData[]);
 
-// The main function that prints all combinations of size r
-// in arr[] of size n. This function mainly uses combinationUtil()
 void printCombination(int arr[], int n, int r,int peso[],int*valort,int vetor[], int N)
 {
-    // A temporary array to store all combination one by one
     int data[r];
     int pesoData[r];
 
-    // Print all combination using temprary array 'data[]'
     combinationUtil(arr, data, 0, n-1, 0, r, peso,valort,vetor,N, pesoData);
 }
 
-/* arr[]  ---> Input Array
-   data[] ---> Temporary array to store current combination
-   start & end ---> Staring and Ending indexes in arr[]
-   index  ---> Current index in data[]
-   r ---> Size of a combination to be printed */
 void combinationUtil(int arr[], int data[], int start, int end,int index, int r,int peso[],int* valort,int vetor[], int N, int pesoData[])
 {
     int pesot = 0;
     int newvalor = 0;
-    int tempPos = 0;
 
-    // Current combination is ready to be printed, print it
     if (index == r)
     {
 
@@ -44,15 +31,11 @@ void combinationUtil(int arr[], int data[], int start, int end,int index, int r,
                         break;
                     }
                 }
-
-            //printf("%d ", data[j]);
         }
          if(pesot <= C)
         {
             if(*valort <= newvalor)
             {
-                //printf("=%d=\n", newvalor);
-                //printf("peso total = %d \n",pesot);
                 *valort = newvalor;
                 for(int i =0;i < r;i++)
                 {
@@ -63,10 +46,6 @@ void combinationUtil(int arr[], int data[], int start, int end,int index, int r,
         return;
     }
 
-    // replace index with all possible elements. The condition
-    // "end-i+1 >= r-index" makes sure that including one element
-    // at index will make a combination with remaining elements
-    // at remaining positions
     for (int i=start; i<=end && end-i+1 >= r-index; i++)
     {
         data[index] = arr[i];
@@ -75,10 +54,9 @@ void combinationUtil(int arr[], int data[], int start, int end,int index, int r,
     }
 }
 
-// Driver program to test above functions
 int main()
 {
-    clock_t Ticks[2];
+    clock_t Ticks[3];
     Ticks[0] = clock();
 
     int N = 0;
@@ -104,19 +82,22 @@ int main()
         vetor[j] = 0;
         }
         j = 0;
-        //printf("%d", N);
         while(fscanf(input, "%d %d", &peso[j], &itens[j]) != EOF)
         {
-            //itens[j] = j;
             j++;
         }
 
         int n = sizeof(itens)/sizeof(itens[0]);
-                //printf("%d", n);
         for(int i = 1;i <= N;i++)
         {
+            //Ticks[1] = clock(); //Usado pelo debug abaixo
             l = i;
             printCombination(itens, n, l,peso,&valort,vetor, N);
+            //Ticks[2] = clock(); // Usado pelo debug abaixo
+            //double TempoTotal = (Ticks[2] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC; //Usado pela função abaixo
+            //double Tempo = (Ticks[2] - Ticks[1]) * 1000.0 / CLOCKS_PER_SEC;      //Usadop pela função abaixo
+            //printf("Tempo gasto pela operacao de tamanho %d:  %g ms.\n", l, Tempo); //Debug, mostra o tempo gasto no total pela operação de um tamanho l
+            //printf("Tempo gasto pela operacao no total:\t %g ms.\n",TempoTotal); //Debug, mostra o tempo gasto no total pelo programa nesse momento;
         }
         printf("Valores na mochila: ");
         for(int i =0;i < N;i++){
@@ -130,6 +111,5 @@ int main()
     Ticks[1] = clock();
     double Tempo = (Ticks[1] - Ticks[0]) * 1000.0 / CLOCKS_PER_SEC;
     printf("Tempo gasto: %g ms.\n", Tempo);
-    system("pause");
     return 0;
 }
